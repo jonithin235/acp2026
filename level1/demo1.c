@@ -2,10 +2,11 @@
 #include<stdio.h>
 void input(int n,float arry[n]);
 int find_max_index(int n, float arr[n]);
-void output(float arry[n], int max_index);
+void output(float arry[], int max_index);
 
 int main(){
     int n;
+    int max_index;
     printf("Enter the number of floating number ");
     scanf("%d",&n);
 
@@ -14,7 +15,7 @@ int main(){
 
     input(n,arry);
 
-    find_max_index(n,arry);
+    max_index=find_max_index(n,arry);
 
     output(arry,max_index);
 
@@ -28,14 +29,18 @@ void input(int n,float arry[n]){
     }
 }
 
-find_max_index(int n,float arr[n]){
+int find_max_index(int n,float arr[n]){
 int max_index=0;
 for(int i=1;i<n;i++){
-    if(arry[i]>arry[max_index]){
+    if(arr[i]>arr[max_index]){
         max_index=i;
     }
 }
 return max_index;
 }
 
-void output(foat)
+void output(float arry[], int max_index){
+    printf("The max value of the array is %f and its index is %d", arry[max_index], max_index);
+    printf("\n");
+    
+}
