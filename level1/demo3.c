@@ -51,4 +51,4 @@ int findLargestArea(int n, Rectangle rects[n]){
 void output(int largestIndex, Rectangle rects[]){
     printf("The rectanle with the largest area is %d with area %.2f",largestIndex,rects[largestIndex].area);
 
-}/ c
+}
