@@ -1,33 +1,42 @@
 #include <stdio.h>
+#include <string.h>
 typedef struct {
-    char player_name[100];
-    int jersey_number;
-    float runs_scored;
-} Player;
-
-void readPlayers(int n, Player p[]);
-float calculateAverageRuns(int n, Player p[]);
+    char destination[100];
+    int flight_number;
+    int available_seats;
+} Flight_t;
+void readFlights(int n, Flight_t f[]); 
+void searchByDestination(int n, Flight_t f[], char searchDest[]);
 
 int main(){
-    int n=11;
-    Player play[n];
-    readPlayers(n,play);
-    float average=calculateAverageRuns(n,play);
-    printf("the average runs scored by the team is %.2f",average);
+    int n=4;
+    Flight_t f[n];
+    readFlights(n,f);
+    char searchDest[100];
+    printf("Enter the destination to search for:\n");
+    scanf("%s",searchDest);
+    searchByDestination(n,f,searchDest);
     return 0;
-
 }
-void readPlayers(int n,Player p[]){
+void readFlights(int n, Flight_t f[]){
     for(int i=0;i<n;i++){
-        printf("enter the players name,jersey number and runs scored:\n");
-        scanf("%s %d %f", p[i].player_name, &p[i].jersey_number, &p[i].runs_scored);
+        printf("Enter the flight details,destination,flight number and availability of seats:\n");
+        scanf("%s %d %d",f[i].destination,&f[i].flight_number,&f[i].available_seats);
+        
     }
 }
-
-float calculateAverageRuns(int n, Player p[]){
-    float total_runs=0;
+void searchByDestination(int n, Flight_t f[], char searchDest[]){
+    int found=0;
     for(int i=0;i<n;i++){
-        total_runs+=p[i].runs_scored;
+        if(strcmp(f[i].destination,searchDest)==0){
+            printf("Flight number: %d,Available seats: %d\n",f[i].flight_number,f[i].available_seats);
+            found=1;
+        
+        }
+      
     }
-    return total_runs/n;
+    if(found==0){
+        printf("No flightd for the destionation found.\n");
+    }
+    
 }
