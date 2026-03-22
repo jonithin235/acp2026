@@ -21,7 +21,7 @@ int main(){
 void readFlights(int n, Flight_t f[]){
     for(int i=0;i<n;i++){
         printf("Enter the flight details,destination,flight number and availability of seats:\n");
-        scanf("%s %d %d",f[i].destination,&f[i].flight_number,&f[i].available_seats);
+        scanf("%d %s %d", &f[i].flight_number, f[i].destination, &f[i].available_seats);
         
     }
 }
