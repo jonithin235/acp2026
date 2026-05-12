@@ -30,7 +30,7 @@ int main() {
     // Write to file
     writeToTextFile(students, n ,"students.txt");
     // Read from file
-    int count = readFromTextFile(students, n ,"students.txt");
+    int count = readFromTextFile(students, 100 ,"students.txt");
     // Output
     printf("\n--- Students read from ASCII file ---\n");
     printStudents(students, count);
@@ -41,7 +41,7 @@ int main() {
 // Function to take input
 void inputStudents(Student students[], int n) {
    for(int i=0;i<n;i++){ 
-        printf("\nEnter details for student %d:\n",i );
+        printf("\nEnter details for student %d:\n",i+1);
 
         printf("Enter ID: ");
         scanf("%d", &students[i].id);
@@ -60,9 +60,11 @@ void writeToTextFile(Student students[], int n, const char *filename) {
     FILE *fp=fopen("students.txt","w");
     if(fp==NULL){
         printf("Error opening file for writing\n");
-        return 0;
+        return;
     }
-    int count=fwrite(students,sizeof(students),n,fp);
+    for(int i=0;i<n;i++){
+        fprintf(fp, "%d %s %.2f\n", students[i].id,students[i].name,students[i].marks);
+    }
     fclose(fp);
 }
 
@@ -73,14 +75,24 @@ int readFromTextFile(Student students[], int max, const char *filename) {
         printf("Error opening file for reading\n");
     return 0;
     }
-    int count=fread(students,sizeof(students),100,fp);
+    int i=0;
+    while(i<max){
+    int result=fscanf(fp, "%d %s %f",&students[i].id , students[i].name,&students[i].marks);
+    if(result!=3){
+        break;
+    }
+    i++;
+    }
     fclose(fp);
-    return count;
+    return i;
 }
 
 // Print students
 void printStudents(Student students[], int n) {
-    for(int i=0;i<n;i++){
-        printf("%d %s %.2f\n",students[i].id,students[i].name,students[i].marks);
+       for(int i=0;i<n;i++){
+        printf("%d %s %.2f\n",
+        students[i].id,
+        students[i].name,
+        students[i].marks);
     }
 }
